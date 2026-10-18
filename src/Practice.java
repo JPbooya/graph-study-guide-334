@@ -175,8 +175,30 @@ public class Practice {
    * @return whether there exists a valid positive path from starting to ending
    */
   public static boolean positivePathExists(Map<Integer, Set<Integer>> graph, int starting, int ending) {
+
+    if(starting <= 0 || ending <= 0 || !graph.containsKey(starting) || !graph.containsKey(ending)) return false;
+
+    HashSet<Integer> visited = new HashSet<>();
+    return pathHelper(graph, visited, starting, ending);
+  }
+
+  private static boolean pathHelper(Map<Integer, Set<Integer>> graph, HashSet<Integer> visited, int current, int target) {
+    if(current <= 0) return false;
+    if(current == target) return true;
+    if(visited.contains(current)) return false;
+
+    visited.add(current);
+
+    if(graph.containsKey(current)) {
+    for(Integer neighbor : graph.get(current)) {
+       if( pathHelper(graph, visited, neighbor,target)) return true;
+      }
+    }
+    
     return false;
   }
+
+
 
   /**
    * Returns true if a professional has anyone in their extended network (reachable through any number of links)
