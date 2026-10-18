@@ -141,7 +141,25 @@ public class Practice {
    * @return true if there is a two-way connection between v1 and v2, false otherwise
    */
   public static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2) {
-    return false;
+    if(v1 == null || v2 == null) return false;
+    HashSet<Vertex<T>> visited1 = new HashSet<>();
+    HashSet<Vertex<T>> visited2 = new HashSet<>();
+    return twoWayHelper(visited1, v1, v2) && twoWayHelper(visited2, v2, v1);
+  }
+
+  private static <T> boolean twoWayHelper(HashSet<Vertex<T>> visited, Vertex<T> current, Vertex<T> target) {
+      if(current == null) return false;
+      if(current == target) return true;
+      if(visited.contains(current)) return false;
+
+      visited.add(current);
+
+      for(Vertex<T> neighbor : current.neighbors) {
+        if(twoWayHelper(visited, neighbor, target)) {
+          return true;
+        }
+      }
+      return false;
   }
 
   /**
