@@ -37,34 +37,37 @@ public class Practice {
    * @param starting the starting vertex (may be null)
    * @return the number of vertices with odd values reachable from the starting
    *         vertex
-  //  */
+   *         //
+   */
   // public static int oddVertices(Vertex<Integer> starting) {
-  //   HashSet<Vertex<Integer>> visited = new HashSet<>();
-  //   return oddHelper(starting, visited);
+  // HashSet<Vertex<Integer>> visited = new HashSet<>();
+  // return oddHelper(starting, visited);
 
   // }
 
-  // private static int oddHelper(Vertex<Integer> current, HashSet<Vertex<Integer>> visited) {
-  //   if (current == null)
-  //     return 0;
-  //   if (visited.contains(current))
-  //     return 0;
+  // private static int oddHelper(Vertex<Integer> current,
+  // HashSet<Vertex<Integer>> visited) {
+  // if (current == null)
+  // return 0;
+  // if (visited.contains(current))
+  // return 0;
 
-  //   visited.add(current);
-  //   int count = 0;
+  // visited.add(current);
+  // int count = 0;
 
-  //   if (current.data % 2 != 0) {
-  //     count++;
-  //   }
-
-  //   for (Vertex<Integer> neighbor : current.neighbors) {
-  //     count += oddHelper(neighbor, visited);
-  //   }
-
-  //   return count;
+  // if (current.data % 2 != 0) {
+  // count++;
   // }
 
-   /** Iterative DFS Version  **?
+  // for (Vertex<Integer> neighbor : current.neighbors) {
+  // count += oddHelper(neighbor, visited);
+  // }
+
+  // return count;
+  // }
+
+  /**
+   * Iterative DFS Version **
    * Returns the count of vertices with odd values that can be reached from the
    * given starting vertex.
    * The starting vertex is included in the count if its value is odd.
@@ -88,29 +91,30 @@ public class Practice {
    *         vertex
    */
   // public static int oddVertices(Vertex<Integer> starting) {
-  //   Stack<Vertex<Integer>> stack = new Stack<>();
-  //   HashSet<Vertex<Integer>> visited = new HashSet<>();
-  //   stack.push(starting);
+  // Stack<Vertex<Integer>> stack = new Stack<>();
+  // HashSet<Vertex<Integer>> visited = new HashSet<>();
+  // stack.push(starting);
 
+  // int count = 0;
 
-  //   int count = 0;
-
-  //   while(!stack.isEmpty()) {
-  //     Vertex<Integer> current = stack.pop();
-  //     if(current == null || visited.contains(current)) continue; // skip too next neighbor
-  //     visited.add(current);
-  //     if(current.data % 2 != 0) {
-  //       count++;
-  //     }
-  //     for(Vertex<Integer> neighbor : current.neighbors) {
-  //         stack.push(neighbor);
-  //     }
-  //   }
-  //   return count;
+  // while(!stack.isEmpty()) {
+  // Vertex<Integer> current = stack.pop();
+  // if(current == null || visited.contains(current)) continue; // skip too next
+  // neighbor
+  // visited.add(current);
+  // if(current.data % 2 != 0) {
+  // count++;
+  // }
+  // for(Vertex<Integer> neighbor : current.neighbors) {
+  // stack.push(neighbor);
+  // }
+  // }
+  // return count;
 
   // }
 
-    /** Iterative BFS Version  **?
+  /**
+   * Iterative BFS Version **?
    * Returns the count of vertices with odd values that can be reached from the
    * given starting vertex.
    * The starting vertex is included in the count if its value is odd.
@@ -134,7 +138,8 @@ public class Practice {
    *         vertex
    */
   public static int oddVertices(Vertex<Integer> starting) {
-    if(starting == null) return 0;
+    if (starting == null)
+      return 0;
     Queue<Vertex<Integer>> queue = new ArrayDeque<>();
     HashSet<Vertex<Integer>> visited = new HashSet<>();
     visited.add(starting);
@@ -142,24 +147,22 @@ public class Practice {
 
     int count = 0;
 
-    while(!queue.isEmpty()) {
+    while (!queue.isEmpty()) {
       Vertex<Integer> current = queue.poll();
-      if(current.data % 2 != 0) {
+      if (current.data % 2 != 0) {
         count++;
       }
-      for(Vertex<Integer> neighbor : current.neighbors) {
-          if(neighbor == null || visited.contains(neighbor)) continue;
-          visited.add(neighbor);
-          queue.offer(neighbor);
+      for (Vertex<Integer> neighbor : current.neighbors) {
+        if (neighbor == null || visited.contains(neighbor))
+          continue;
+        visited.add(neighbor);
+        queue.offer(neighbor);
 
       }
     }
     return count;
 
   }
-
-
-
 
   /**
    * Returns a *sorted* list of all values reachable from the starting vertex
@@ -181,69 +184,70 @@ public class Practice {
    * @return a sorted list of all reachable vertex values by
    */
   // public static List<Integer> sortedReachable(Vertex<Integer> starting) {
-  //   HashSet<Vertex<Integer>> visited = new HashSet<>();
-  //   List<Integer> result = new ArrayList<>();
-  //   sortedHelper(starting, visited, result);
-  //   Collections.sort(result);
-  //   return result;
+  // HashSet<Vertex<Integer>> visited = new HashSet<>();
+  // List<Integer> result = new ArrayList<>();
+  // sortedHelper(starting, visited, result);
+  // Collections.sort(result);
+  // return result;
   // }
 
-  // private static void sortedHelper(Vertex<Integer> current, HashSet<Vertex<Integer>> visited, List<Integer> result) {
-  //   if (current == null)
-  //     return;
-  //   if (visited.contains(current))
-  //     return;
+  // private static void sortedHelper(Vertex<Integer> current,
+  // HashSet<Vertex<Integer>> visited, List<Integer> result) {
+  // if (current == null)
+  // return;
+  // if (visited.contains(current))
+  // return;
 
-  //   visited.add(current);
-  //   result.add(current.data);
+  // visited.add(current);
+  // result.add(current.data);
 
-  //   for (Vertex<Integer> neighbor : current.neighbors) {
-  //     sortedHelper(neighbor, visited, result);
-  //   }
+  // for (Vertex<Integer> neighbor : current.neighbors) {
+  // sortedHelper(neighbor, visited, result);
+  // }
   // }
 
   // /** Iterative DFS **
-  //  * Returns a *sorted* list of all values reachable from the starting vertex
-  //  * (including the starting vertex itself).
-  //  * If duplicate vertex data exists, duplicates should appear in the output.
-  //  * If the starting vertex is null, returns an empty list.
-  //  * They should be sorted in ascending numerical order.
-  //  *
-  //  * Example:
-  //  * Consider a graph where:
-  //  * 5 --> 8
-  //  * | |
-  //  * v v
-  //  * 8 --> 2 <-- 4
-  //  * When starting from the vertex with value 5, the output should be:
-  //  * [2, 5, 8, 8]
-  //  *
-  //  * @param starting the starting vertex (may be null)
-  //  * @return a sorted list of all reachable vertex values by
-  //  */
+  // * Returns a *sorted* list of all values reachable from the starting vertex
+  // * (including the starting vertex itself).
+  // * If duplicate vertex data exists, duplicates should appear in the output.
+  // * If the starting vertex is null, returns an empty list.
+  // * They should be sorted in ascending numerical order.
+  // *
+  // * Example:
+  // * Consider a graph where:
+  // * 5 --> 8
+  // * | |
+  // * v v
+  // * 8 --> 2 <-- 4
+  // * When starting from the vertex with value 5, the output should be:
+  // * [2, 5, 8, 8]
+  // *
+  // * @param starting the starting vertex (may be null)
+  // * @return a sorted list of all reachable vertex values by
+  // */
   // public static List<Integer> sortedReachable(Vertex<Integer> starting) {
-  //   if(starting == null ) return new ArrayList<>();
-  //   Stack<Vertex<Integer>> stack = new Stack<>();
-  //   HashSet<Vertex<Integer>> visited = new HashSet<>();
-  //   List<Integer> result = new ArrayList<>();
-  //   stack.push(starting);
-    
-  //   while(!stack.isEmpty()) {
-  //     Vertex<Integer> current = stack.pop();
-  //     if(current == null || visited.contains(current)) continue; // skip
-  //      visited.add(current);
-  //      result.add(current.data);
-  //      for(Vertex<Integer> neighbor : current.neighbors) {
-  //       stack.push(neighbor);
-  //      }
+  // if(starting == null ) return new ArrayList<>();
+  // Stack<Vertex<Integer>> stack = new Stack<>();
+  // HashSet<Vertex<Integer>> visited = new HashSet<>();
+  // List<Integer> result = new ArrayList<>();
+  // stack.push(starting);
 
-  //   }
-  //   Collections.sort(result);
-  //   return result;
+  // while(!stack.isEmpty()) {
+  // Vertex<Integer> current = stack.pop();
+  // if(current == null || visited.contains(current)) continue; // skip
+  // visited.add(current);
+  // result.add(current.data);
+  // for(Vertex<Integer> neighbor : current.neighbors) {
+  // stack.push(neighbor);
   // }
 
+  // }
+  // Collections.sort(result);
+  // return result;
+  // }
 
-  /** Iterative BFS **
+  /**
+   * Iterative BFS **
    * Returns a *sorted* list of all values reachable from the starting vertex
    * (including the starting vertex itself).
    * If duplicate vertex data exists, duplicates should appear in the output.
@@ -263,21 +267,23 @@ public class Practice {
    * @return a sorted list of all reachable vertex values by
    */
   public static List<Integer> sortedReachable(Vertex<Integer> starting) {
-    if(starting == null ) return new ArrayList<>();
+    if (starting == null)
+      return new ArrayList<>();
     Queue<Vertex<Integer>> queue = new ArrayDeque<>();
     HashSet<Vertex<Integer>> visited = new HashSet<>();
     List<Integer> result = new ArrayList<>();
     visited.add(starting);
     queue.offer(starting);
-    
-    while(!queue.isEmpty()) {
+
+    while (!queue.isEmpty()) {
       Vertex<Integer> current = queue.poll();
-       result.add(current.data);
-       for(Vertex<Integer> neighbor : current.neighbors) {
-        if(neighbor == null || visited.contains(neighbor)) continue; // skip
+      result.add(current.data);
+      for (Vertex<Integer> neighbor : current.neighbors) {
+        if (neighbor == null || visited.contains(neighbor))
+          continue; // skip
         visited.add(neighbor);
         queue.offer(neighbor);
-       }
+      }
     }
     Collections.sort(result);
     return result;
@@ -324,92 +330,94 @@ public class Practice {
   }
 
   // /**
-  //  * Returns true if and only if it is possible both to reach v2 from v1 and to
-  //  * reach v1 from v2.
-  //  * A vertex is always considered reachable from itself.
-  //  * If either v1 or v2 is null or if one cannot reach the other, returns false.
-  //  *
-  //  * Example:
-  //  * If v1 and v2 are connected in a cycle, the method should return true.
-  //  * If v1 equals v2, the method should also return true.
-  //  *
-  //  * @param <T> the type of data stored in the vertex
-  //  * @param v1  the starting vertex
-  //  * @param v2  the target vertex
-  //  * @return true if there is a two-way connection between v1 and v2, false
-  //  *         otherwise
-  //  */
+  // * Returns true if and only if it is possible both to reach v2 from v1 and to
+  // * reach v1 from v2.
+  // * A vertex is always considered reachable from itself.
+  // * If either v1 or v2 is null or if one cannot reach the other, returns false.
+  // *
+  // * Example:
+  // * If v1 and v2 are connected in a cycle, the method should return true.
+  // * If v1 equals v2, the method should also return true.
+  // *
+  // * @param <T> the type of data stored in the vertex
+  // * @param v1 the starting vertex
+  // * @param v2 the target vertex
+  // * @return true if there is a two-way connection between v1 and v2, false
+  // * otherwise
+  // */
   // public static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2) {
-  //   if (v1 == null || v2 == null)
-  //     return false;
-  //   HashSet<Vertex<T>> visited1 = new HashSet<>();
-  //   HashSet<Vertex<T>> visited2 = new HashSet<>();
-  //   return twoWayHelper(visited1, v1, v2) && twoWayHelper(visited2, v2, v1);
+  // if (v1 == null || v2 == null)
+  // return false;
+  // HashSet<Vertex<T>> visited1 = new HashSet<>();
+  // HashSet<Vertex<T>> visited2 = new HashSet<>();
+  // return twoWayHelper(visited1, v1, v2) && twoWayHelper(visited2, v2, v1);
   // }
 
-  // private static <T> boolean twoWayHelper(HashSet<Vertex<T>> visited, Vertex<T> current, Vertex<T> target) {
-  //   if (current == null)
-  //     return false;
-  //   if (current == target)
-  //     return true;
-  //   if (visited.contains(current))
-  //     return false;
+  // private static <T> boolean twoWayHelper(HashSet<Vertex<T>> visited, Vertex<T>
+  // current, Vertex<T> target) {
+  // if (current == null)
+  // return false;
+  // if (current == target)
+  // return true;
+  // if (visited.contains(current))
+  // return false;
 
-  //   visited.add(current);
+  // visited.add(current);
 
-  //   for (Vertex<T> neighbor : current.neighbors) {
-  //     if (twoWayHelper(visited, neighbor, target)) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
+  // for (Vertex<T> neighbor : current.neighbors) {
+  // if (twoWayHelper(visited, neighbor, target)) {
+  // return true;
+  // }
+  // }
+  // return false;
   // }
 
+  // /** Iterative DFS **
+  // * Returns true if and only if it is possible both to reach v2 from v1 and to
+  // * reach v1 from v2.
+  // * A vertex is always considered reachable from itself.
+  // * If either v1 or v2 is null or if one cannot reach the other, returns false.
+  // *
+  // * Example:
+  // * If v1 and v2 are connected in a cycle, the method should return true.
+  // * If v1 equals v2, the method should also return true.
+  // *
+  // * @param <T> the type of data stored in the vertex
+  // * @param v1 the starting vertex
+  // * @param v2 the target vertex
+  // * @return true if there is a two-way connection between v1 and v2, false
+  // * otherwise
+  // */
+  // public static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2) {
+  // if (v1 == null || v2 == null)
+  // return false;
+  // HashSet<Vertex<T>> visited1 = new HashSet<>();
+  // HashSet<Vertex<T>> visited2 = new HashSet<>();
+  // return itrativeHelper(v1, v2) && itrativeHelper(v2, v1);
+  // }
 
-//   /** Iterative DFS **
-//    * Returns true if and only if it is possible both to reach v2 from v1 and to
-//    * reach v1 from v2.
-//    * A vertex is always considered reachable from itself.
-//    * If either v1 or v2 is null or if one cannot reach the other, returns false.
-//    *
-//    * Example:
-//    * If v1 and v2 are connected in a cycle, the method should return true.
-//    * If v1 equals v2, the method should also return true.
-//    *
-//    * @param <T> the type of data stored in the vertex
-//    * @param v1  the starting vertex
-//    * @param v2  the target vertex
-//    * @return true if there is a two-way connection between v1 and v2, false
-//    *         otherwise
-//    */
-//   public static <T> boolean twoWay(Vertex<T> v1, Vertex<T> v2) {
-//     if (v1 == null || v2 == null)
-//       return false;
-//     HashSet<Vertex<T>> visited1 = new HashSet<>();
-//     HashSet<Vertex<T>> visited2 = new HashSet<>();
-//     return itrativeHelper(v1, v2) && itrativeHelper(v2, v1);
-//   }
+  // private static <T> boolean itrativeHelper(Vertex<T> start, Vertex<T> target)
+  // {
+  // HashSet<Vertex<T>> visited = new HashSet<>();
+  // Stack<Vertex<T>> stack = new Stack<>();
+  // stack.push(start);
 
-//   private static <T> boolean itrativeHelper(Vertex<T> start, Vertex<T> target) {
-//     HashSet<Vertex<T>> visited = new HashSet<>();
-//     Stack<Vertex<T>> stack = new Stack<>();
-//     stack.push(start);
+  // while(!stack.isEmpty()) {
+  // Vertex<T> current = stack.pop();
+  // if(current == target) {
+  // return true;
+  // }
+  // if(current == null || visited.contains(current)) continue;
+  // visited.add(current);
+  // for (Vertex<T> neighbor : current.neighbors) {
+  // stack.push(neighbor);
+  // }
+  // }
+  // return false;
+  // }
 
-//     while(!stack.isEmpty()) {
-//       Vertex<T> current = stack.pop();
-//       if(current == target) {
-//         return true;
-//       }
-//       if(current == null || visited.contains(current)) continue;
-//       visited.add(current);
-//     for (Vertex<T> neighbor : current.neighbors) {
-//           stack.push(neighbor);
-//     }
-//   }
-//   return false;
-// }
-
-/** Iterative BFS **
+  /**
+   * Iterative BFS **
    * Returns true if and only if it is possible both to reach v2 from v1 and to
    * reach v1 from v2.
    * A vertex is always considered reachable from itself.
@@ -439,66 +447,69 @@ public class Practice {
     visited.add(start);
     queue.offer(start);
 
-    while(!queue.isEmpty()) {
+    while (!queue.isEmpty()) {
       Vertex<T> current = queue.poll();
-      if(current == target) {
+      if (current == target) {
         return true;
       }
-      
-    for (Vertex<T> neighbor : current.neighbors) {
-      if(neighbor == null || visited.contains(neighbor)) continue;
-      visited.add(neighbor);
-      queue.offer(neighbor);
+
+      for (Vertex<T> neighbor : current.neighbors) {
+        if (neighbor == null || visited.contains(neighbor))
+          continue;
+        visited.add(neighbor);
+        queue.offer(neighbor);
+      }
     }
+    return false;
   }
-  return false;
-}
 
   // /** Itertive DFS **
-  //  * Returns whether there exists a path from the starting to ending vertex that
-  //  * includes only positive values.
-  //  * 
-  //  * The graph is represented as a map where each key is a vertex and each value
-  //  * is a set of directly reachable neighbor vertices. A vertex is always
-  //  * considered reachable from itself.
-  //  * If the starting or ending vertex is not positive or is not present in the
-  //  * keys of the map, or if no valid path exists,
-  //  * returns false.
-  //  *
-  //  * @param graph    a map representing the graph
-  //  * @param starting the starting vertex value
-  //  * @param ending   the ending vertex value
-  //  * @return whether there exists a valid positive path from starting to ending
-  //  */
-  // public static boolean positivePathExists(Map<Integer, Set<Integer>> graph, int starting, int ending) {
+  // * Returns whether there exists a path from the starting to ending vertex that
+  // * includes only positive values.
+  // *
+  // * The graph is represented as a map where each key is a vertex and each value
+  // * is a set of directly reachable neighbor vertices. A vertex is always
+  // * considered reachable from itself.
+  // * If the starting or ending vertex is not positive or is not present in the
+  // * keys of the map, or if no valid path exists,
+  // * returns false.
+  // *
+  // * @param graph a map representing the graph
+  // * @param starting the starting vertex value
+  // * @param ending the ending vertex value
+  // * @return whether there exists a valid positive path from starting to ending
+  // */
+  // public static boolean positivePathExists(Map<Integer, Set<Integer>> graph,
+  // int starting, int ending) {
 
-  //   if (starting <= 0 || ending <= 0 || !graph.containsKey(starting) || !graph.containsKey(ending))
-  //     return false;
+  // if (starting <= 0 || ending <= 0 || !graph.containsKey(starting) ||
+  // !graph.containsKey(ending))
+  // return false;
 
-  //   Stack<Integer> stack = new Stack<>();
-  //   HashSet<Integer> visited = new HashSet<>();
-  //   stack.push(starting);
+  // Stack<Integer> stack = new Stack<>();
+  // HashSet<Integer> visited = new HashSet<>();
+  // stack.push(starting);
 
-  //   while(!stack.isEmpty()) {
+  // while(!stack.isEmpty()) {
 
-  //   int current = stack.pop();
-  //   if (current == ending)
-  //     return true;
-  //   if (current <= 0 || visited.contains(current)) continue;
+  // int current = stack.pop();
+  // if (current == ending)
+  // return true;
+  // if (current <= 0 || visited.contains(current)) continue;
 
-  //   visited.add(current);
+  // visited.add(current);
 
-  //   if (graph.containsKey(current)) {
-  //     for (Integer neighbor : graph.get(current)) {
-  //       stack.push(neighbor);
-  //     }
-  //   }
+  // if (graph.containsKey(current)) {
+  // for (Integer neighbor : graph.get(current)) {
+  // stack.push(neighbor);
   // }
-  //   return false;
+  // }
+  // }
+  // return false;
   // }
 
-
-  /** Itertive BFS **
+  /**
+   * Itertive BFS **
    * Returns whether there exists a path from the starting to ending vertex that
    * includes only positive values.
    * 
@@ -521,103 +532,108 @@ public class Practice {
 
     Queue<Integer> queue = new ArrayDeque<>();
     HashSet<Integer> visited = new HashSet<>();
-    visited.add(starting); 
+    visited.add(starting);
     queue.offer(starting);
 
-    while(!queue.isEmpty()) {
+    while (!queue.isEmpty()) {
 
-    int current = queue.poll();
-    if (current == ending)
-      return true;
-    
+      int current = queue.poll();
+      if (current == ending)
+        return true;
 
-    if (graph.containsKey(current)) {
-      for (Integer neighbor : graph.get(current)) {
-        if (neighbor == null || neighbor <= 0 || visited.contains(neighbor)) continue;
-        visited.add(neighbor);
-        queue.offer(neighbor);
+      if (graph.containsKey(current)) {
+        for (Integer neighbor : graph.get(current)) {
+          if (neighbor == null || neighbor <= 0 || visited.contains(neighbor))
+            continue;
+          visited.add(neighbor);
+          queue.offer(neighbor);
+        }
       }
     }
-  }
     return false;
   }
 
   /**
-  //  * Returns true if a professional has anyone in their extended network
-  //  * (reachable through any number of links)
-  //  * that works for the given company. The search includes the professional
-  //  * themself.
-  //  * If the professional is null, returns false.
-  //  *
-  //  * @param person      the professional to start the search from (may be null)
-  //  * @param companyName the name of the company to check for employment
-  //  * @return true if a person in the extended network works at the specified
-  //  *         company, false otherwise
-  //  */
-  // public static boolean hasExtendedConnectionAtCompany(Professional person, String companyName) {
+   * // * Returns true if a professional has anyone in their extended network
+   * // * (reachable through any number of links)
+   * // * that works for the given company. The search includes the professional
+   * // * themself.
+   * // * If the professional is null, returns false.
+   * // *
+   * // * @param person the professional to start the search from (may be null)
+   * // * @param companyName the name of the company to check for employment
+   * // * @return true if a person in the extended network works at the specified
+   * // * company, false otherwise
+   * //
+   */
+  // public static boolean hasExtendedConnectionAtCompany(Professional person,
+  // String companyName) {
 
-  //   if (person == null)
-  //     return false;
-  //   HashSet<Professional> visited = new HashSet<>();
-  //   return extendedHelper(companyName, person, visited);
+  // if (person == null)
+  // return false;
+  // HashSet<Professional> visited = new HashSet<>();
+  // return extendedHelper(companyName, person, visited);
 
   // }
 
-  // private static boolean extendedHelper(String companyName, Professional current, HashSet<Professional> visited) {
-  //   if (current == null)
-  //     return false;
-  //   if (current.getCompany().equals(companyName))
-  //     return true;
-  //   if (visited.contains(current))
-  //     return false;
-  //   visited.add(current);
+  // private static boolean extendedHelper(String companyName, Professional
+  // current, HashSet<Professional> visited) {
+  // if (current == null)
+  // return false;
+  // if (current.getCompany().equals(companyName))
+  // return true;
+  // if (visited.contains(current))
+  // return false;
+  // visited.add(current);
 
-  //   for (Professional neighbor : current.getConnections()) {
-  //     if (extendedHelper(companyName, neighbor, visited)) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
+  // for (Professional neighbor : current.getConnections()) {
+  // if (extendedHelper(companyName, neighbor, visited)) {
+  // return true;
+  // }
+  // }
+  // return false;
   // }
 
   // /** Iterative DFS **
-  //  * Returns true if a professional has anyone in their extended network
-  //  * (reachable through any number of links)
-  //  * that works for the given company. The search includes the professional
-  //  * themself.
-  //  * If the professional is null, returns false.
-  //  *
-  //  * @param person      the professional to start the search from (may be null)
-  //  * @param companyName the name of the company to check for employment
-  //  * @return true if a person in the extended network works at the specified
-  //  *         company, false otherwise
-  //  */
-  // public static boolean hasExtendedConnectionAtCompany(Professional person, String companyName) {
+  // * Returns true if a professional has anyone in their extended network
+  // * (reachable through any number of links)
+  // * that works for the given company. The search includes the professional
+  // * themself.
+  // * If the professional is null, returns false.
+  // *
+  // * @param person the professional to start the search from (may be null)
+  // * @param companyName the name of the company to check for employment
+  // * @return true if a person in the extended network works at the specified
+  // * company, false otherwise
+  // */
+  // public static boolean hasExtendedConnectionAtCompany(Professional person,
+  // String companyName) {
 
-  //   if (person == null)
-  //     return false;
-  //   Stack<Professional> stack = new Stack<>();
-  //   HashSet<Professional> visited = new HashSet<>();
+  // if (person == null)
+  // return false;
+  // Stack<Professional> stack = new Stack<>();
+  // HashSet<Professional> visited = new HashSet<>();
 
-  //   stack.push(person);
+  // stack.push(person);
 
-  //   while(!stack.isEmpty()) {
-  //     Professional current = stack.pop();
-  //   if (current == null) continue;
+  // while(!stack.isEmpty()) {
+  // Professional current = stack.pop();
+  // if (current == null) continue;
 
-  //   if (current.getCompany().equals(companyName))
-  //     return true;
-  //   if (visited.contains(current)) continue;
-  //   visited.add(current);
+  // if (current.getCompany().equals(companyName))
+  // return true;
+  // if (visited.contains(current)) continue;
+  // visited.add(current);
 
-  //   for (Professional neighbor : current.getConnections()) {
-  //       stack.push(neighbor);
-  //     }
-  //   }
-  //   return false;
+  // for (Professional neighbor : current.getConnections()) {
+  // stack.push(neighbor);
+  // }
+  // }
+  // return false;
   // }
 
-  /** Iterative BFS **
+  /**
+   * Iterative BFS **
    * Returns true if a professional has anyone in their extended network
    * (reachable through any number of links)
    * that works for the given company. The search includes the professional
@@ -638,22 +654,20 @@ public class Practice {
     visited.add(person);
     queue.offer(person);
 
-    while(!queue.isEmpty()) {
+    while (!queue.isEmpty()) {
       Professional current = queue.poll();
 
-    if (current.getCompany().equals(companyName))
-      return true;
+      if (current.getCompany().equals(companyName))
+        return true;
 
-    for (Professional neighbor : current.getConnections()) {
-      if(neighbor == null || visited.contains(neighbor))
-        visited.add(neighbor);
+      for (Professional neighbor : current.getConnections()) {
+        if (neighbor == null || visited.contains(neighbor))
+          visited.add(neighbor);
         queue.offer(neighbor);
       }
     }
     return false;
   }
-
-
 
   /**
    * Returns a list of possible next moves starting from a given position.
@@ -831,20 +845,20 @@ public class Practice {
     return sumHelper(starting, visited, graph);
   }
 
-private static int sumHelper(int current, HashSet<Integer> visited, Map<Integer, Set<Integer>> graph) {
-  if (visited.contains(current))
-    return 0;
-  visited.add(current);
+  private static int sumHelper(int current, HashSet<Integer> visited, Map<Integer, Set<Integer>> graph) {
+    if (visited.contains(current))
+      return 0;
+    visited.add(current);
 
-  int count = current;
+    int count = current;
 
-  if (graph.containsKey(current)) {
-    for (Integer neighbor : graph.get(current)) {
-      count += sumHelper(neighbor, visited, graph);
+    if (graph.containsKey(current)) {
+      for (Integer neighbor : graph.get(current)) {
+        count += sumHelper(neighbor, visited, graph);
+      }
     }
+    return count;
   }
-  return count;
-}
 
   /**
    * Returns true if any vertex reachable from starting (including
@@ -889,25 +903,28 @@ private static int sumHelper(int current, HashSet<Integer> visited, Map<Integer,
    * Example:
    * Consider a graph where:
    *
-   *   "pear" --> "kiwi"
+   * "pear" --> "kiwi"
    *
-   *   |          |
+   * | |
    *
-   *   v          v
+   * v v
    *
-   *   "plum" --> "fig" < -- "apple"
+   * "plum" --> "fig" < -- "apple"
    *
-   *   |
+   * |
    *
-   *   v
+   * v
    *
-   *   "grape"
+   * "grape"
    *
-   * Starting from "pear", the reachable strings are "pear", "kiwi", "plum", "fig", and "grape".
+   * Starting from "pear", the reachable strings are "pear", "kiwi", "plum",
+   * "fig", and "grape".
    * Thus, given "pear", the smallest reachable string is "fig".
    * Note that "apple" is not reachable from "pear", so it is not considered.
+   * 
    * @param starting the starting vertex (may be null)
-   * @return the smallest string reachable from the starting vertex, or null if starting is null
+   * @return the smallest string reachable from the starting vertex, or null if
+   *         starting is null
    */
   public static String smallestString(Vertex<String> starting) {
     if (starting == null)
@@ -934,5 +951,128 @@ private static int sumHelper(int current, HashSet<Integer> visited, Map<Integer,
     }
 
     return smallestStr;
+  }
+
+  /**
+   * Returns the largest value reachable from the starting vertex
+   * (including the starting vertex itself).
+   * If starting is null, returns Integer.MIN_VALUE.
+   *
+   * Example: 3 --> 9 --> 1
+   * | ^
+   * v |
+   * 4 ----------+
+   * Starting from 3 → returns 9
+   * Starting from 4 → returns 4
+   */
+  // public static int maxReachable(Vertex<Integer> starting) {
+  // // so in this case i will be checking first if starting is
+  // // null, if it is ill return int.min.value
+  // if(starting == null) return Integer.MIN_VALUE;
+
+  // Stack<Vertex<Integer>> stack = new Stack<>();
+  // Set<Vertex<Integer>> visited = new HashSet<>();
+
+  // stack.push(starting);
+  // int max = starting.data;
+
+  // while(!stack.isEmpty()) {
+  // Vertex<Integer> current = stack.pop();
+  // if(current == null || visited.contains(current)) continue;
+  // visited.add(current);
+  // for(Vertex<Integer> neighbor : current.neighbors) {
+  // stack.push(neighbor);
+  // }
+  // }
+  // return max;
+  // }
+
+  /**
+   * Returns the largest value reachable from the starting vertex
+   * (including the starting vertex itself).
+   * If starting is null, returns Integer.MIN_VALUE.
+   *
+   * Example: 3 --> 9 --> 1
+   * | ^
+   * v |
+   * 4 ----------+
+   * Starting from 3 → returns 9
+   * Starting from 4 → returns 4
+   */
+  public static int maxReachable(Vertex<Integer> starting) {
+    if (starting == null)
+      return Integer.MIN_VALUE;
+
+    Queue<Vertex<Integer>> queue = new ArrayDeque<>();
+    Set<Vertex<Integer>> visited = new HashSet<>();
+
+    visited.add(starting);
+    queue.offer(starting);
+
+    int max = starting.data;
+
+    while (!queue.isEmpty()) {
+      Vertex<Integer> current = queue.poll();
+
+      if (current.data > max) {
+        max = current.data;
+      }
+
+      for (Vertex<Integer> neighbor : current.neighbors) {
+        if (neighbor == null || visited.contains(neighbor))
+          continue; 
+        visited.add(neighbor); 
+        queue.offer(neighbor);
+      }
+    }
+    return max;
+  }
+
+
+
+
+
+/**
+ * Returns how many vertices can be reached from starting
+ * (including starting itself), moving only through vertices
+ * whose value is LESS THAN limit.
+ *
+ * The graph is a map where each key is a vertex and its value is the
+ * set of neighbors it points to.
+ * If starting is not a key in the map, or starting >= limit, return 0.
+ *
+ * Example graph:
+ *   1 -> {2, 8}
+ *   2 -> {3}
+ *   3 -> {1}
+ *   8 -> {4}
+ *   4 -> {}
+ *
+ * countUnderLimit(graph, 1, 5)  → 3   (1, 2, 3; 8 is blocked, so 4 can't be reached)
+ * countUnderLimit(graph, 1, 10) → 5   (1, 2, 3, 8, 4)
+ * countUnderLimit(graph, 8, 5)  → 0   (starting is not under the limit)
+ */
+public static int countUnderLimit(Map<Integer, Set<Integer>> graph, int starting, int limit) {
+  if(!graph.containsKey(starting) || starting >= limit) return 0;
+
+  Stack<Integer> stack = new Stack<>();
+  Set<Integer> visited = new HashSet<>();
+  int count = 0;
+
+  stack.add(starting);
+
+  while(!stack.isEmpty()) {
+    int current = stack.pop();
+    if(visited.contains(current) || current >= limit) continue;
+    visited.add(current);
+    count++;
+
+  if(graph.containsKey(current)) {
+    for(Integer neighbor : graph.get(current)) {
+      stack.push(neighbor);
+      }
+    }
+  }
+  return count;
   }
 }
